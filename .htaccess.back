@@ -1,0 +1,44 @@
+# ============================================
+# FICHIER : .htaccess
+# RÔLE : Configuration des réécritures d'URL
+# ============================================
+
+# Activer le moteur de réécriture
+RewriteEngine On
+
+# Rediriger la racine vers index.php (qui gère la redirection)
+RewriteRule ^$ index.php [L]
+
+# Masquer l'extension .php pour les pages existantes
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^/]+)/?$ $1.php [L]
+
+# Redirection des modules (ex: /beneficiaires -> /modules/beneficiaires/index.php)
+RewriteRule ^beneficiaires$ modules/beneficiaries/index.php [L]
+RewriteRule ^beneficiaires/([a-z]+)$ modules/beneficiaries/$1.php [L]
+RewriteRule ^inscriptions$ modules/enrollments/index.php [L]
+RewriteRule ^presences$ modules/attendances/index.php [L]
+RewriteRule ^microprojets$ modules/microprojects/index.php [L]
+RewriteRule ^rapports$ modules/reports/index.php [L]
+
+# Sécuriser les dossiers sensibles
+<FilesMatch "\.(php|ini|log)$">
+    Require all denied
+</FilesMatch>
+
+# Sécuriser le dossier includes/
+<FilesMatch "\.(php|inc)$">
+    Require all denied
+</FilesMatch>
+
+# Sécuriser le dossier uploads/
+<FilesMatch "\.(php|phtml|php3|php4|php5|phps)$">
+    Require all denied
+</FilesMatch>
+
+# Empêcher le listage des dossiers
+Options -Indexes
+
+# Gestion des erreurs 404
+ErrorDocument 404 /index.php?error=404
