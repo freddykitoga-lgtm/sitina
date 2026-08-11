@@ -62,11 +62,6 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo BASE_URL; ?>modules/enrollments/">
-                            <i class="fas fa-user-graduate"></i> Inscriptions
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="<?php echo BASE_URL; ?>modules/attendances/">
                             <i class="fas fa-clipboard-check"></i> Présences
                         </a>
